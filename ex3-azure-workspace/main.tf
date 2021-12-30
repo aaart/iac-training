@@ -15,26 +15,26 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "tst-rsx-grp"
-  location = "westeurope"
+  name     = var.resx_group["name"]
+  location = var.resx_group["location"]
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "tst-vnet"
+  name                = format("%s%s", var.resx_prefix, "-vnet")
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
 
 resource "azurerm_subnet" "subnet" {
-  name                 = "tst-subnet"
+  name                 = format("%s%s", var.resx_prefix, "-subnet")
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.2.0/24"]
 }
 
 resource "azurerm_network_interface" "nic" {
-  name                = "tst-nic"
+  name                = format("%s%s", var.resx_prefix, "-nic")
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -46,7 +46,7 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_linux_virtual_machine" "machine" {
-  name                = "tst-machine"
+  name                = format("%s%s", var.resx_prefix, "-machine")
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   size                = "Standard_F2"
