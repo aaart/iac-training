@@ -1,7 +1,21 @@
 locals {
+  
+  resource_name_template     = "terraformed%s${var.target_environment}"
+
+  kv_name                    = format(local.resource_name_template, "kv")
+  acr_name                   = format(local.resource_name_template, "acr")
+  aks_name                   = format(local.resource_name_template, "aks")
+
+  network = {
+    vnet_name           = "${local.aks_name}-vnet"
+    subnet_name         = "${local.aks_name}-subnet"
+    address_space       = ["10.100.0.0/16"]
+    address_prefixes    = ["10.100.128.0/17"]
+  }
+  
   kv = {
     tenant_id                = var.tenant_id
-    name                     = "terraformed-kv"
+    name                     = "terraformedkv${var.target_environment}"
     sku_name                 = "standard"
     resource_group_name      = data.azurerm_resource_group.rg.name
     location                 = data.azurerm_resource_group.rg.location
@@ -9,7 +23,7 @@ locals {
   }
 
   acr = {
-    name                = "terraformedacr"
+    name                = "terraformedacr${var.target_environment}"
     resource_group_name = data.azurerm_resource_group.rg.name
     location            = data.azurerm_resource_group.rg.location
     admin_enabled       = true
@@ -17,8 +31,8 @@ locals {
   }
 
   cluster = {
-    name                = "terraformed-cluster"
-    dns_prefix          = "terraformed-cluster"
+    name                = "terraformed-cluster-${var.target_environment}"
+    dns_prefix          = "terraformed-cluster-${var.target_environment}"
     resource_group_name = data.azurerm_resource_group.rg.name
     location            = data.azurerm_resource_group.rg.location
 
@@ -36,15 +50,6 @@ locals {
     }
 
     auth_template         = "{\"auths\":{\"%s.azurecr.io\":{\"username\":\"%s\",\"password\":\"%s\",\"email\":\"email@mail.com\",\"auth\":\"%s\"}}}"
-  }
-
-  network = {
-    vnet_name           = "${local.cluster.name}-network"
-    subnet_name         = "${local.cluster.name}-subnet"
-    resource_group_name = data.azurerm_resource_group.rg.name
-    location            = data.azurerm_resource_group.rg.location
-    address_space       = ["10.100.0.0/16"]
-    address_prefixes    = ["10.100.128.0/17"]
   }
 
   cluster_node_pool = {
