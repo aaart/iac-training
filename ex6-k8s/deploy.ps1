@@ -16,7 +16,7 @@ if (-not ((terraform -chdir=res workspace list) -match "$Target")) {
 }
 
 if (-not $TerraformingIdentity) {
-    $terraformingIdentity = (az ad signed-in-user show --query=objectId).Trim('"')
+    $terraformingIdentity =  ((az ad signed-in-user show --query=objectId) ?? (az ad signed-in-user show --query=id)).Trim('"')
 }
 
 $terraformingIdentity = $TerraformingIdentity
