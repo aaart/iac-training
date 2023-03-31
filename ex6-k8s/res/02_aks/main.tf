@@ -74,3 +74,23 @@ resource "azurerm_key_vault_secret" "cluster_auth" {
                             var.aks_acr_password,
                             base64encode("${var.aks_acr_name}:${var.aks_acr_password}"))
 }
+
+output "aks_host_url" {
+  value = azurerm_kubernetes_cluster.cluster.kube_config[0].host
+}
+
+output "aks_cluster_full_name" {
+  value = trim(trim(azurerm_kubernetes_cluster.cluster.kube_config[0].host, "https://"), ":443")
+}
+
+output "aks_client_certificate" {
+  value = azurerm_kubernetes_cluster.cluster.kube_config[0].client_certificate
+}
+
+output "aks_client_key" {
+  value = azurerm_kubernetes_cluster.cluster.kube_config[0].client_key
+}
+
+output "aks_ca_certificate" {
+  value = azurerm_kubernetes_cluster.cluster.kube_config[0].cluster_ca_certificate
+}

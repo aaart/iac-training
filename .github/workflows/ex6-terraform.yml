@@ -1,9 +1,17 @@
 name: ex6-terraform
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 jobs:
   greet:
     runs-on: ubuntu-latest
     steps:
+    - name: checkout self
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github }}
+
     - name: Send greeting
       run: echo "Hello World!"
