@@ -1,7 +1,7 @@
 #!/bin/bash
 
 terraform validate
-terraform plan -out=ex7.tfplan \
+terraform plan -out=plan.tfplan \
                -var-file=./tfvars/dev.tfvars \
                -var default_tenant_id=$TENANT_ID \
                -var default_client_id=$TERRAFORM_CLIENT_ID \
