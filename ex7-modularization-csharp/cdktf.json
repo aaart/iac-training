@@ -1,0 +1,10 @@
+{
+  "language": "csharp",
+  "app": "dotnet run --configuration Release --project ex7-modularization-csharp.csproj",
+  "projectId": "5f609057-7541-4a26-9b42-798ae9bc924e",
+  "sendCrashReports": "true",
+  "terraformProviders": ["azurerm"],
+  "terraformModules": [],
+  "context": {
+  }
+}

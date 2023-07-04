@@ -1,3 +1,0 @@
-module "resources" {
-    source = "./resources"
-}

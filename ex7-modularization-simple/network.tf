@@ -1,5 +1,5 @@
 module "vnet_central_naming" {
-  source            = "./../modules/naming"
+  source            = "./modules/naming"
   resource_type     = "virtual_network"
   resource_location = azurerm_resource_group.central.location
   resource_area     = "central"
@@ -7,7 +7,7 @@ module "vnet_central_naming" {
 }
 
 resource "azurerm_virtual_network" "hub" {
-  name                = module.rg_central_naming.name
+  name                = module.vnet_central_naming.name
   address_space       = ["10.0.0.0/24"]
   location            = azurerm_resource_group.central.location
   resource_group_name = azurerm_resource_group.central.name

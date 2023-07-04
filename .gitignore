@@ -30,3 +30,9 @@ override.tf.json
 # example: *tfplan*
 plan.out
 *.tfplan
+
+obj/
+bin/
+cdktf.out/
+.gen/
+.idea/
