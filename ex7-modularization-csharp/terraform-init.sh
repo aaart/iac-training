@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+﻿#!/bin/sh
 
 terraform -chdir=./cdktf.out/stacks/azurerm \
           init \

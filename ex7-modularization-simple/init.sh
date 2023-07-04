@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 terraform init -reconfigure \
                -backend-config=key=ex7.tfstate \

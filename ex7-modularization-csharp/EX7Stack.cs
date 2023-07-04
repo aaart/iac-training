@@ -49,6 +49,21 @@ namespace EX7.Modularization.CSharp
                 Type = "string"
             });
 
+            new TerraformVariable(scope, "default_tenant_id", new TerraformVariableConfig
+            {
+                Type = "string"
+            });
+
+            new TerraformVariable(scope, "default_client_id", new TerraformVariableConfig
+            {
+                Type = "string"
+            });
+
+            new TerraformVariable(scope, "default_client_secret", new TerraformVariableConfig
+            {
+                Type = "string"
+            });
+
             new AzurermProvider(scope, "azurerm", new AzurermProviderConfig { Features = new AzurermProviderFeatures() });
             var centralRg = new ResourceGroup(scope, "central", new ResourceGroupConfig
             {
