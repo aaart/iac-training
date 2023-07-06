@@ -1,3 +1,3 @@
 locals {
-  kv_secret_names = split(" ", var.kv_secrets)
+  kv_secret_names = toset(split(" ", var.kv_secrets))
 }

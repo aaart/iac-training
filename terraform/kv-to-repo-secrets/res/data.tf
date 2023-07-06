@@ -4,7 +4,7 @@ data "azurerm_key_vault" "kv" {
 }
 
 data "azurerm_key_vault_secret" "secrets" {
-  for_each     = [ local.kv_secret_names ]
+  for_each     = local.kv_secret_names
   key_vault_id = data.azurerm_key_vault.kv.id
   name         = each.key
 }
