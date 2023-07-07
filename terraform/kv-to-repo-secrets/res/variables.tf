@@ -27,10 +27,10 @@ variable "kv_secrets" {
   description = "space separated list of secret names to be retrieved from the key vault."
 }
 
-# variable "github_token" {
-#   type = string
-# }
+variable "github_token" {
+  type = string
+}
 
-# variable "github_repository_environment" {
-#   type = string
-# }
+variable "github_repository_environment" {
+  type = string
+}
