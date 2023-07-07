@@ -4,9 +4,9 @@ locals {
   kv_secret_names = toset(split(" ", var.kv_secrets))
 
   kv_secrets_map = {
-    for secret in local.kv_secret_names : secret => {
-      name = replace(replace(secret, "${local.repository_name_no_owner}---", ""), "-", "_")
-      value = data.azurerm_key_vault_secret.secrets[secret].value
+    for secret_name in local.kv_secret_names : secret_name => {
+      name = replace(replace(secret_name, "${local.repository_name_no_owner}---", ""), "-", "_")
+      value = data.azurerm_key_vault_secret.secrets[secret_name].value
     }
   }
 }
