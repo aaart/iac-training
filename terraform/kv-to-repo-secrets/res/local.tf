@@ -1,5 +1,5 @@
 locals {
-  repository_name_no_owner = replace(var.github_repository_name, var.github_owner + "/", "")
+  repository_name_no_owner = replace(var.github_repository_name, "${var.github_owner}/", "")
 
   kv_secret_names = toset(split(" ", var.kv_secrets))
 
