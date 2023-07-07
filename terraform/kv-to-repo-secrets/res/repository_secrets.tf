@@ -4,5 +4,5 @@ resource "github_actions_environment_secret" "secret" {
   repository        = var.github_repository_name
   environment       = var.github_repository_environment
   secret_name       = each.key
-  plaintext_value   = each.value
+  plaintext_value   = each.value.value
 }
